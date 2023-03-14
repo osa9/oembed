@@ -68,6 +68,7 @@ const gnd = {
   draw: function () {
     this.y = parseFloat(scrn.height - this.sprite.height);
     sctx.drawImage(this.sprite, this.x, this.y);
+    sctx.drawImage(this.sprite, this.x + this.sprite.width, this.y)
   },
   update: function () {
     if (state.curr != state.Play) return;
@@ -82,12 +83,13 @@ const bg = {
   draw: function () {
     y = parseFloat(scrn.height - this.sprite.height);
     sctx.drawImage(this.sprite, this.x, y);
+    sctx.drawImage(this.sprite, this.x + this.sprite.width, y);
   },
 };
 const pipe = {
   top: { sprite: new Image() },
   bot: { sprite: new Image() },
-  gap: 85,
+  gap: 95,
   moved: true,
   pipes: [],
   draw: function () {
@@ -106,8 +108,8 @@ const pipe = {
     if (frames % 100 == 0) {
       this.pipes.push({
         x: parseFloat(scrn.width),
-        y: -210 * Math.min(Math.random() + 1, 1.8),
-      });
+        y: -280 -100 * Math.min(Math.random()),
+      }); // [-280, -380]
     }
     this.pipes.forEach((pipe) => {
       pipe.x -= dx;
